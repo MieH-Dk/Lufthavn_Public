@@ -19,39 +19,47 @@ month_of_choice = month_of_choice.lower().capitalize()
 
 """SGH HERE"""
 SGH_file = st.file_uploader("Herunder skal du uploade SGH-filen", type=["xlsx"])
-if SGH_file:
-    SGH_df = SGH_parser.format_SGH(SGH_file)
-    st.write("Great! SGH data loaded successfully.")
-else:
-    SGH_df = None
 
 """LUFTHANSA HERE"""
 Lufthansa_file = st.file_uploader("Herunder skal du uploade Lufthansa-filen", type=["xlsx"])
-if Lufthansa_file:
-    Lufthansa_df = Lufthansa_parser.lufthansa_final_df(Lufthansa_file)
-    st.write("Great! Lufthansa data loaded successfully.")
-else:
-    Lufthansa_df = None
+
 
 """AVIATOR HERE"""
 DTO_file = st.file_uploader("Herunder skal du uploade Aviator-filen", type=["xlsx"])
-if DTO_file:
-    DTO_df = DTO_parser.format_DTO(DTO_file)
-    st.write("Great! Aviator data loaded successfully.")
-else:    
-    DTO_df = None
+
     
 """MENZIES HERE"""
 Menzies_file = st.file_uploader("Herunder skal du uploade Menzies-filen", type=["xlsx"])
-if Menzies_file:
-    Menzies_df = Menzies_parser.menzies_final_df(Menzies_file)
-    st.write("Great! Menzies data loaded successfully.")
-else:
-    Menzies_df = None
 
-process = st.button("Process data")
+
+process = st.button("Generer fil")
 if process:
-    st.write("OK - Will process now!")
+    st.write("OK - Jeg går i gang!")
+    if SGH_file:
+        st.write("SGH data indlæses...")
+        SGH_df = SGH_parser.format_SGH(SGH_file)
+        st.write("SGH data indlæst med succes.")
+    else:
+        SGH_df = None
+    if Lufthansa_file:
+        st.write("Lufthansa data indlæses...")
+        Lufthansa_df = Lufthansa_parser.lufthansa_final_df(Lufthansa_file)
+        st.write("Lufthansa data indlæst med succes.")
+    else:
+        Lufthansa_df = None
+    if DTO_file:
+        st.write("Aviator data indlæses...")
+        DTO_df = DTO_parser.format_DTO(DTO_file)
+        st.write("Aviator data indlæst med succes.")
+    else:    
+        DTO_df = None
+    if Menzies_file:
+        st.write("Menzies data indlæses...")
+        Menzies_df = Menzies_parser.menzies_final_df(Menzies_file)
+        st.write("Menzies data indlæst med succes.")
+    else:
+        Menzies_df = None
+
     dfs = [df for df in [SGH_df, Lufthansa_df, DTO_df, Menzies_df] if df is not None]
 
     if dfs:
@@ -67,7 +75,7 @@ if process:
     else:
         
         import schedule_maker
-
+        st.write("Genererer skemafil... Vent bare lidt længere nu!")
         all_flights['dato'] = pd.to_datetime(all_flights['dato'])
         all_clean = all_flights[(all_flights['måned']==month_of_choice)] #kigger både på  clean og wr
         year_string = str(all_clean['dato'].iloc[0].year) #only to name the excel file at the end

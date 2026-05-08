@@ -3,11 +3,11 @@ import pandas as pd
 from datetime import datetime, timedelta
 current_date = datetime.today()
 from pathlib import Path
-wr_file = (
-    Path("Selskaber")
-    / "SGH"
-    / "SGH datafiler"
-    / "SK wasteremoval_januar24.xlsx")
+BASE_DIR = Path(__file__).parent
+
+wr_file = BASE_DIR / "SGH datafiler" / "SK wasteremoval_januar24.xlsx"
+
+wr_df = pd.read_excel(wr_file, sheet_name="Filtreret")
 
 #wr_file='Selskaber\SGH\SGH datafiler\SK wasteremoval_januar24.xlsx'
 
@@ -28,7 +28,6 @@ def create_rengoringstype(row, wr_list):
     
     # Lister med sorteringskriterier
 airlines_to_remove=['SQ', 'TG', '6I', 'BJ', 'BT', 'D0', 'DX', 'ET', 'EW', 'JTD', 'PE', 'R6', 'SLD', 'V7', 'WF', 'TF', 'YW', 'ZQ'] #AL
-wr_df = pd.read_excel(wr_file, sheet_name="Filtreret")
 waste_remove=list(wr_df['STN'])
 #waste_remove=['HAU', 'KRS', 'MMX', 'SVG', 'TRD', 'LLA' 'UME', 'TOS', 'BOO', 'OSL', 'ARN', 'AAL', 'AAR', 'AES', 'BGO', 'FAE', 'GOT'] #dest
 wide_body=['333', '330', '32Q', '359', '788', '338', '332', '767', '76W', '789', '339', '76W'] #Note here that '32Q' is just normal clean, if AL=='DK'
