@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from datetime import datetime, timedelta
 
-airlines_to_keep = ['AF', 'EY', 'IA', 'KL', 'LG', 'VN','LO', 'OU', 'RC', 'SN', 'UD', 'CA', 'FI', 'FH', 'MU', 'AZ', 'NO'] #EY og MU er WB men kun arrival
+airlines_to_keep = ['AF', 'EY', 'IA', 'KL', 'LG', 'VN','LO', 'OU', 'RC', 'SN', 'UD', 'CA', 'FI', 'FH', 'MU', 'AZ', 'NO', 'WS'] #EY og MU er WB men kun arrival
 wb_airlines = ['EY', 'CA', 'MU', 'VN']
 month_mapping = {1: 'Januar', 2: 'Februar', 3: 'Marts', 4: 'April', 5: 'Maj', 6: 'Juni', 7: 'Juli', 8: 'August', 9: 'September', 10: 'Oktober',11: 'November',12: 'December'}
 weekday_mapping = {
